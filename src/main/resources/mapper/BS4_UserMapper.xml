@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.erun.lzq.dao.BS4_UserMapper">
+
+	<resultMap id="BaseResultMap" type="com.erun.lzq.bean.BS4_User">
+		<id column="UserCode" jdbcType="NVARCHAR" property="usercode" />
+		<result column="UserName" jdbcType="NVARCHAR" property="username" />
+		<result column="Password" jdbcType="NVARCHAR" property="password" />
+		<result column="EmpCode" jdbcType="NVARCHAR" property="empcode" />
+		<result column="DeptCode" jdbcType="NVARCHAR" property="deptcode" />
+		<result column="LastOnlineTime" jdbcType="TIMESTAMP" property="lastonlinetime" />
+		<result column="Replacer" jdbcType="NVARCHAR" property="replacer" />
+		<result column="MobilePhone" jdbcType="NVARCHAR" property="mobilephone" />
+	</resultMap>
+	
+	
+	<sql id="Base_Column_List">
+		UserCode, UserName, Password, EmpCode, DeptCode, LastOnlineTime, Replacer, MobilePhone
+	</sql>
+	
+	<sql id="Whre_key">
+		where UserCode = #{record.usercode,jdbcType=NVARCHAR},
+	</sql>
+	
+	<sql id="Whrer_Condition">
+		<where>
+			<trim suffixOverrides="and">
+				<if test="condition.usercode !=null">
+					and UserCode = #{condition.usercode}
+				</if>
+				<if test="condition.username != null">
+					and UserName = #{condition.username}
+				</if>
+				<if test="condition.password != null">
+					and Password = #{condition.password}
+				</if>
+				<if test="condition.empcode != null">
+					and EmpCode = #{condition.empcode}
+				</if>
+				<if test="condition.deptcode != null">
+					and DeptCode = #{condition.deptcode}
+				</if>
+				<if test="condition.lastonlinetime != null">
+					and LastOnlineTime = #{condition.lastonlinetime}
+				</if>
+				<if test="condition.replacer != null">
+					and Replacer = #{condition.replacerR}
+				</if>
+				<if test="condition.mobilephone != null">
+					and MobilePhone = #{condition.mobilephone}
+				</if>
+			</trim>
+		</where>
+	</sql>
+	
+	<sql id="Whrer_Condition_Date">
+		<where>
+			<trim suffixOverrides="and">
+				<if test="condition.usercode !=null">
+					and UserCode = #{condition.usercode}
+				</if>
+				<if test="condition.username != null">
+					and UserName = #{condition.username}
+				</if>
+				<if test="condition.password != null">
+					and Password = #{condition.password}
+				</if>
+				<if test="condition.empcode != null">
+					and EmpCode = #{condition.empcode}
+				</if>
+				<if test="condition.deptcode != null">
+					and DeptCode = #{condition.deptcode}
+				</if>
+				<if test="condition.replacer != null">
+					and Replacer = #{condition.replacerR}
+				</if>
+				<if test="condition.mobilephone != null">
+					and MobilePhone = #{condition.mobilephone}
+				</if>
+					and LastOnlineTime  Between  #{beginDate,jdbcType=TIMESTAMP} and #{endDate,jdbcType=TIMESTAMP}
+			</trim>
+		</where>
+	</sql>
+	
+ 	<sql id="Bind">
+ 		<if test="condition.usercode !=null">
+			<bind name="_UserCode" value="'%'+condition.usercode+'%'"/>
+ 		</if>
+ 		<if test="condition.username !=null">
+ 			<bind name="_UserName" value="'%'+condition.username+'%'"/>
+ 		</if>
+ 		<if test="condition.password !=null">
+ 			<bind name="_Password" value="'%'+condition.password+'%'"/>
+ 		</if>
+ 		<if test="condition.empcode !=null">
+ 			<bind name="_EmpCode" value="'%'+condition.empcode+'%'"/>
+ 		</if>
+ 		<if test="condition.deptcode !=null">
+ 			<bind name="_DeptCode" value="'%'+condition.deptcode+'%'"/>
+ 		</if>
+ 		<if test="condition.lastonlinetime !=null">
+ 			<bind name="_LastOnlineTime" value="'%'+condition.lastonlinetime+'%'"/>
+ 		</if>
+ 		<if test="condition.replacer !=null">
+ 			<bind name="_Replacer" value="'%'+condition.replacer+'%'"/>
+ 		</if>
+ 		<if test="condition.mobilephone !=null">
+ 			<bind name="_MobilePhone" value="'%'+condition.mobilephone+'%'"/>
+ 		</if>
+	</sql>
+	
+	<sql id="Whrer_Condition_like">
+		<where>
+			<trim suffixOverrides="and">
+				<if test="condition.usercode !=null">
+					and UserCode like #{_UserCode}
+				</if>
+				<if test="condition.username != null">
+					and UserName like #{_UserName}
+				</if>
+				<if test="condition.password != null">
+					and Password like #{_Password}
+				</if>
+				<if test="condition.empcode != null">
+					and EmpCode like #{_EmpCode}
+				</if>
+				<if test="condition.deptcode != null">
+					and DeptCode like #{_DeptCode}
+				</if>
+				<if test="condition.lastonlinetime != null">
+					and LastOnlineTime like #{_LastOnlineTime}
+				</if>
+				<if test="condition.replacer != null">
+					and Replacer like #{_Replacer}
+				</if>
+				<if test="condition.mobilephone != null">
+					and MobilePhone like #{_MobilePhone}
+				</if>
+			</trim>
+		</where>
+	</sql>
+	
+	<sql id="UpdateSet">
+		<set>
+			<if test="record.usercode != null">
+				UserCode = #{record.usercode,jdbcType=NVARCHAR},
+			</if>
+			<if test="record.username != null">
+				UserName = #{record.username,jdbcType=NVARCHAR},
+			</if>
+			<if test="record.password != null">
+				Password = #{record.password,jdbcType=NVARCHAR},
+			</if>
+			<if test="record.empcode != null">
+				EmpCode = #{record.empcode,jdbcType=NVARCHAR},
+			</if>
+			<if test="record.deptcode != null">
+				DeptCode = #{record.deptcode,jdbcType=NVARCHAR},
+			</if>
+			<if test="record.lastonlinetime != null">
+				LastOnlineTime = #{record.lastonlinetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.replacer != null">
+				Replacer = #{record.replacer,jdbcType=NVARCHAR},
+			</if>
+			<if test="record.mobilephone != null">
+				MobilePhone = #{record.mobilephone,jdbcType=NVARCHAR},
+			</if>
+		</set>
+	</sql>
+	
+	
+	<select id="QueryByCondition" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List"></include>
+		from BS4_User
+		<include refid="Whrer_Condition"></include>	
+	 </select>
+	
+	<select id="QueryByLikeCondition" resultMap="BaseResultMap">
+		<include refid="Bind"></include>
+		select 
+		<include refid="Base_Column_List"></include>
+		from BS4_User
+		<include refid="Whrer_Condition_like"></include>	
+	 </select>
+	 
+	 <select id="QueryByDateCondition" resultMap="BaseResultMap">
+	 	select 
+		<include refid="Base_Column_List"></include>
+		from BS4_User
+		<include refid="Whrer_Condition_Date"></include>	 
+	 </select>
+	
+	 <insert id="Insert" parameterType="com.erun.lzq.bean.BS4_User">
+	    insert into BS4_User
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		  <if test="usercode != null">
+		    UserCode,
+		  </if>
+		  <if test="username != null">
+		    UserName,
+		  </if>
+		  <if test="password != null">
+		    Password,
+		  </if>
+		  <if test="empcode != null">
+		    EmpCode,
+		  </if>
+		  <if test="deptcode != null">
+		    DeptCode,
+		  </if>
+		  <if test="lastonlinetime != null">
+		    LastOnlineTime,
+		  </if>
+		  <if test="replacer != null">
+		    Replacer,
+		  </if>
+		  <if test="mobilephone != null">
+		    MobilePhone,
+		  </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		  <if test="usercode != null">
+		    #{usercode,jdbcType=NVARCHAR},
+		  </if>
+		  <if test="username != null">
+		    #{username,jdbcType=NVARCHAR},
+		  </if>
+		  <if test="password != null">
+		    #{password,jdbcType=NVARCHAR},
+		  </if>
+		  <if test="empcode != null">
+		    #{empcode,jdbcType=NVARCHAR},
+		  </if>
+		  <if test="deptcode != null">
+		    #{deptcode,jdbcType=NVARCHAR},
+		  </if>
+		  <if test="lastonlinetime != null">
+		    #{lastonlinetime,jdbcType=TIMESTAMP},
+		  </if>
+		  <if test="replacer != null">
+		    #{replacer,jdbcType=NVARCHAR},
+		  </if>
+		  <if test="mobilephone != null">
+		    #{mobilephone,jdbcType=NVARCHAR},
+		  </if>
+		</trim>
+	</insert>
+	
+	<update id="Update">
+		update BS4_User
+		<include refid="UpdateSet"></include>
+		<include refid="Whre_key"></include>
+	</update>
+  
+</mapper>

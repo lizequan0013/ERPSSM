@@ -1,0 +1,103 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;UTF-8">
+	<title>易当家E10</title>
+	<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+	<script language="javascript">
+		var ValidateCode = null;
+		$(function() {
+			getimg()
+		});
+		
+		function getimg() {
+			$.ajax({
+				contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+				url:"ValidateImage/getimge",
+				type:"GET",
+				success:function(result){
+					if(result.code == 100){
+						$("#ValidateImg").attr('src', result.extend.img);
+						ValidateCode = result.extend.sRand;
+					}else{
+						alert("获取验证码失败");
+					}
+				}
+			});
+		}
+		
+		function login() {
+			$.ajax({
+				contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+				url:"User/query",
+				type:"GET",
+				data : $("#userfrom").serialize(),
+				success:function(result){
+					if(result.code == 100){
+						location.href = "main.html";
+					}else{
+						alert("账号或密码不正确");
+					}
+				}
+			});
+		}
+		
+		function chk() {
+			if (document.form1.usercode.value == "") {
+				alert("请输入用户名!");
+				document.form1.usercode.focus();
+				return false;
+			} else if (document.form1.password.value == "") {
+				alert('请输入密码!');
+				document.form1.password.focus();
+				return false;
+			} else if (window.form1.ValidateCode.value == "") {
+				alert('请输入验证码！');
+				document.form1.ValidateCode.focus();
+				return false;
+			} else if (window.form1.ValidateCode.value != ValidateCode) {
+				alert('验证码错误');
+			}else{
+				login();
+			}
+		};
+	</script>
+</head>
+<body scroll=no style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;background:#FFFFFF;font-size:13px;">
+	<table id="maintable" width="100%" border=0>
+		<tr>
+			<td valign="middle" align="center">
+				<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
+					<tr>
+						<td></td>
+						<td width="381px" height="1px"></td>
+						<td width="250px"></td>
+						<td width="263px" height="1px"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td background="imgs/loginfull.jpg">&nbsp;</td>
+						<td width="894px" height="436px" align="left" valign="top" background="imgs/login3.jpg" colspan="3">
+							<div style="position:relative;left:500px;top:160px;width:320px;height:150px;font-size:14px;background:#FFFFFF;">
+								<form  id="userfrom" name="form1" method="post" action="index.jsp?action=LoginIn" onsubmit="return chk();">
+									用　户：<input type="text" name="usercode" style="font-size:13px;width:218px;height:22px;border:1px solid #BAC5D4;" value="master" autocomplete="new-password"> <BR> <BR>
+									密　码：<input type="password" name="password" style="font-size:13px;width:218px;height:22px;border:1px solid #BAC5D4;" value="8" autocomplete="new-password"> <BR> <BR>
+									验证码：<img id="ValidateImg" border=0 src="" ALIGN="ABSMIDDLE" onclick="javascript:getimg()"><input class="txt" name="ValidateCode" type="text" style="font-size:13px;width:158px;height:22px;border:1px solid #BAC5D4;" />
+									<a href="javascript:chk()">
+										<img src="imgs/submit.jpg" border=0></a>&nbsp;&nbsp;&nbsp;
+									<a href="javascript:document.form1.reset();">
+										<img src="imgs/reset.jpg" border=0></a>
+								</form>
+							</div>
+						</td>
+						<td background="imgs/loginfull.jpg">&nbsp;</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	
+</body>
+<script type="text/javascript">
+	document.all.maintable.style.height=document.body.clientHeight;
+</script>
+</html>

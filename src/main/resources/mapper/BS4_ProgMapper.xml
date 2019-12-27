@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.erun.lzq.dao.BS4_ProgMapper">
+
+	<select id="BS_GetProg" statementType="CALLABLE" resultType="com.erun.lzq.bean.BS4_Prog">
+		{
+			call BS_GetMenu(
+				#{userCode , mode=IN , jdbcType=VARCHAR},
+				#{ProgParent, mode=IN , jdbcType=VARCHAR}
+			)
+}
+	</select>
+</mapper>
